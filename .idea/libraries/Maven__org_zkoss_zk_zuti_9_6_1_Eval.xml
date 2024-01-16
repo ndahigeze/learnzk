@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Maven: org.zkoss.zk:zuti:9.6.1-Eval">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/zkoss/zk/zuti/9.6.1-Eval/zuti-9.6.1-Eval.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/zkoss/zk/zuti/9.6.1-eval/zuti-9.6.1-eval-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/zkoss/zk/zuti/9.6.1-eval/zuti-9.6.1-eval-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/zkoss/zk/zuti/9.6.1-Eval/zuti-9.6.1-Eval.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,14 @@
+<?link rel="stylesheet" type="text/css" href="/style.css"?>
+<!-- protect page by the authentication init  -->
+<!--<?init class="org.zkoss.essentials.chapter7.AuthenticationInit"?>-->
+
+<zk>
+	<div height="100%">
+		<template name="layout" src="/layout/template.zul"/>
+		<apply template="layout"/>
+		<template name="center">
+			<apply id="content" template="/layout/template.zul" dynamicValue="true"/>
+		</template>
+
+	</div>
+</zk>

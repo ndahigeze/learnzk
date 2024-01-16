@@ -1,0 +1,83 @@
+<zk>
+    <window  viewModel="@id('vm') @init('com.zkproject.viewModels.AddUserViewModel')">
+
+        <caption  sclass="fn-caption"
+                  label="Profile"/>
+        <vlayout>
+            <grid width="400px"
+                  form="@id('fx')@load(vm.newUser)@save(vm.newUser, before='save')"
+            >
+                <columns>
+                    <column align="right" hflex="min"/>
+                    <column/>
+                </columns>
+                <rows>
+                    <row>
+                        <cell sclass="row-title">Account :</cell>
+                        <cell><label value="@load(vm.newUser.account)"/></cell>
+                    </row>
+                    <row>
+                        <cell sclass="row-title">Full Name :</cell>
+                        <cell>
+                            <textbox
+                                    width="200px"
+                                    constraint="no empty: Please enter your full name"
+                                    value="@bind(vm.newUser.fullName)"
+                            />
+                        </cell>
+                    </row>
+                    <row>
+                        <cell sclass="row-title">Email :</cell>
+                        <cell>
+                            <textbox
+                                    width="200px"
+                                    value="@bind(vm.newUser.email)"
+                            />
+                        </cell>
+                    </row>
+                    <row>
+                        <cell sclass="row-title">Birthday :</cell>
+                        <cell><datebox
+                                width="200px"
+                                value="@bind(vm.newUser.birthday)"
+                        />
+                        </cell>
+                    </row>
+                    <row>
+                        <cell sclass="row-title">Country :</cell>
+                        <cell>
+                            <listbox  mold="select" width="200px" model="@load(vm.countries)"  selectedItem="@bind(vm.newUser.country)">
+                                <template name="model">
+                                    <listitem label="@load(each)@save(each)" />
+                                </template>
+                            </listbox>
+                        </cell>
+                    </row>
+                    <row>
+                        <cell sclass="row-title"> Account: </cell>
+                        <cell>
+                            <textbox
+                                    width="200px"
+                                    value="@bind(vm.newUser.account)"
+                                    placeholder="Add You Account"
+
+                            />
+                        </cell>
+                    </row>
+                    <row>
+                        <cell sclass="row-title">Bio :</cell>
+                        <cell>
+                            <textbox value="@bind(vm.newUser.bio)"
+                                     multiline="true" hflex="1" height="100px" />
+                        </cell>
+                    </row>
+                </rows>
+            </grid>
+            <div>You are editing <label />'s profile.</div>
+            <hlayout>
+                <button  label="Save"  onClick="@command('save')"/>
+                <button  label="Reload"  onClick="@command('reload')"/>
+            </hlayout>
+        </vlayout>
+    </window>
+</zk>
