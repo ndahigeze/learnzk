@@ -34,6 +34,8 @@ public class User implements Serializable, Cloneable {
     @Column(nullable = true,length = 1000)
     String bio;
 
+    private String role;
+
     public User(){}
     public User(String account, String fullName, String password, String email, Date birthday, String country, String bio){
         this.account = account;
@@ -43,6 +45,22 @@ public class User implements Serializable, Cloneable {
         this.birthday = birthday;
         this.country = country;
         this.bio = bio;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public static long getSerialVersionUID() {

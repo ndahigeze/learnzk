@@ -7,25 +7,19 @@ import com.zkproject.domain.UserCredential;
 import com.zkproject.services.AuthenticationService;
 import com.zkproject.services.TodoService;
 import com.zkproject.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.annotation.Command;
-import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
-import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zul.Listitem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
-public class AddTodoViewModel {
-
+public class TodoViewModel {
     @WireVariable
     private TodoService todoService;
 
@@ -34,9 +28,6 @@ public class AddTodoViewModel {
 
     @WireVariable
     private AuthenticationService authService;
-
-    @Wire
-    private Listitem todoItem;
 
     private Todo newTodo;
 
@@ -47,21 +38,14 @@ public class AddTodoViewModel {
     private Todo selectedTodo;
 
 
-    public AddTodoViewModel(){
+    public TodoViewModel(){
         this.newTodo=new Todo();
         this.selectedTodo=new Todo();
     }
 
     @Init
     public void init(){
-        UserCredential userCredential=this.authService.getUserCredential();
-        User user=this.userService.findByEmail(userCredential.getEmail());
-        if(user!=null){
-            this.todos=this.todoService.findByUser(user);
-        }else{
-            this.todos=new ArrayList<Todo>();
-        }
-
+      this.todos=this.todoService.findAll();
     }
 
 
@@ -80,17 +64,8 @@ public class AddTodoViewModel {
     @Command
     @NotifyChange("newTodo")
     public void save(){
-        UserCredential userCredential=this.authService.getUserCredential();
-        User user=this.userService.findByEmail(userCredential.getEmail());
-
-        if(user!=null){
-            this.newTodo.setUser(user);
             String res=this.todoService.create(this.newTodo);
-            this.todos=this.todoService.findByUser(user);
             Clients.showNotification(res);
-        }else {
-            Clients.showNotification("User Not found");
-        }
     }
 
     public Todo getNewTodo() {

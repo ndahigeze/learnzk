@@ -24,6 +24,8 @@ public class AddUserViewModel {
 
     private String confirmPassword;
 
+
+
     public AddUserViewModel(){
         this.newUser = new User();
         if(this.newUser==null){
@@ -42,6 +44,8 @@ public class AddUserViewModel {
              Clients.showNotification("Password does not match");
          }
     }
+
+
 
 
     public User getNewUser() {

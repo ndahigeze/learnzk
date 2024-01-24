@@ -1,7 +1,7 @@
 <zk>
     <window viewModel="@id('vm') @init('com.zkproject.viewModels.AddTodoViewModel')">
          <caption sclass="fn-caption"
-                  label="Add My Todo"/>
+                  label="My Todos"/>
         <vlayout>
             <grid  width="600px"
              form="@id('fx')@load(vm.newTodo)@save(vm.newTodo, before='save')"
@@ -43,6 +43,7 @@
             </grid>
             <hlayout>
                 <button  label="Save"  onClick="@command('save')"/>
+                <button  label="Cancel" style="background-color: red"  onClick="@command('cancel')"/>
             </hlayout>
         </vlayout>
 

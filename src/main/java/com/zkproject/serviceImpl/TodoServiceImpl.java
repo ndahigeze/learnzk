@@ -2,6 +2,7 @@ package com.zkproject.serviceImpl;
 
 import com.zkproject.dao.TodoDao;
 import com.zkproject.domain.Todo;
+import com.zkproject.domain.User;
 import com.zkproject.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,17 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public String update(Todo todo) {
-      return "";
+      return this.todoDao.update(todo);
     }
 
     @Override
     public List<Todo> findAll() {
      return this.todoDao.findAll(Todo.class);
+    }
+
+    @Override
+    public List<Todo> findByUser(User user) {
+        return this.todoDao.findByUser(user);
     }
 
     @Override

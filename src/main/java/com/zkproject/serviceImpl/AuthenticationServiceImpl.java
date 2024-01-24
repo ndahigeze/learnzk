@@ -28,6 +28,7 @@ public class AuthenticationServiceImpl implements AuthenticationService, Seriali
 
         Session sess = Sessions.getCurrent();
         UserCredential cre = new UserCredential(user.getAccount(),user.getFullName(),user.getEmail());
+         cre.addRole(user.getRole());
         sess.setAttribute("userCredential",cre);
         return true;
     }

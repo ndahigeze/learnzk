@@ -4,6 +4,7 @@
             apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm')@init('com.zkproject.viewModels.UsersViewModels')"
     >
+        <separator bar="true" spacing="20px"  />
         <hbox>
             keyword:
             <textbox id="keywordBox" value="@save(vm.keyword)"/>
@@ -18,17 +19,17 @@
                 <listheader label="Name"/>
                 <listheader label="Email" />
                 <listheader label="Account" />
-                <listheader label="Bio"/>
             </listhead>
             <template name="model">
-                <listitem>
+                <listitem >
                     <listcell label="@init(each.fullName)"></listcell>
                     <listcell label="@init(each.email)"></listcell>
                     <listcell label="@init(each.account)"></listcell>
-                    <listcell label="@init(each.bio)"></listcell>
                 </listitem>
             </template>
         </listbox>
+
+
 
     </window>
 </zk>

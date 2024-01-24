@@ -13,6 +13,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
 
@@ -42,7 +43,7 @@ public class LoginViewModel  extends SelectorComposer<Component> {
         String password = this.password.getText();
 
         if(!this.authService.login(email, password)){
-            this.message.setValue("account or password are not correct.");
+            Clients.showNotification("Wrong credentials");
             return;
         }
 

@@ -7,8 +7,7 @@
 		<template name="layout" src="/layout/template.zul"/>
 		<apply template="layout"/>
 		<template name="center">
-			<apply id="content" template="/layout/template.zul" dynamicValue="true"/>
+			<apply id="content"  dynamicValue="true"/>
 		</template>
-
 	</div>
 </zk>

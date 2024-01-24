@@ -1,6 +1,8 @@
 package com.zkproject.viewModels;
 
 
+import com.zkproject.domain.UserCredential;
+import com.zkproject.services.AuthenticationService;
 import com.zkproject.services.SidebarPage;
 import com.zkproject.services.SidebarPageConfig;
 import org.zkoss.bind.annotation.Init;
@@ -18,6 +20,11 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.*;
 import org.zkoss.zuti.zul.Apply;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class SidebarNavigation extends SelectorComposer<Component> {
 
@@ -28,6 +35,9 @@ public class SidebarNavigation extends SelectorComposer<Component> {
     //wire service
     @WireVariable("sidebarPageConfigAjaxbased")
     SidebarPageConfig pageConfig;
+
+    @WireVariable
+    AuthenticationService authService;
 
     private String includeSrc = "/home.zul";
 
@@ -55,10 +65,14 @@ public class SidebarNavigation extends SelectorComposer<Component> {
 
         //to initial view after view constructed.
         Rows rows = sidebar.getRows();
-
+        UserCredential credential=authService.getUserCredential();
         for(SidebarPage page:pageConfig.getPages()){
-            Row row = constructSidebarRow(page.getName(),page.getLabel(),page.getIconUri(),page.getUri());
-            rows.appendChild(row);
+            List<String> userRoles=new ArrayList<String>(credential.getRoles());
+            List<String> pageRoles= new ArrayList<String>(page.getRoles());
+            if(credential.isAllowed(userRoles,pageRoles)){
+                Row row = constructSidebarRow(page.getName(),page.getLabel(),page.getIconUri(),page.getUri());
+                rows.appendChild(row);
+            }
         }
         this.setHome();
 

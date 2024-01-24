@@ -140,4 +140,8 @@ public class Todo  implements Serializable, Cloneable {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return subject;
+    }
 }

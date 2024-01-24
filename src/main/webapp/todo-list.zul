@@ -1,0 +1,65 @@
+<zk>
+    <window viewModel="@id('vm') @init('com.zkproject.viewModels.TodoViewModel')">
+        <caption sclass="fn-caption"
+                 label="All Todo"/>
+        <vlayout>
+            <grid  width="600px"
+                   form="@id('fx')@load(vm.newTodo)@save(vm.newTodo, before='save')"
+            >
+                <columns>
+                    <column align="center" hflex="min"/>
+                    <column/>
+                </columns>
+                <rows>
+                    <row>
+                        <cell sclass="row-title">Subject</cell>
+                        <cell>
+                            <textbox width="200px"
+                                     constraint="no empty"
+                                     value="@bind(vm.newTodo.subject)"
+                            />
+                        </cell>
+                    </row>
+                    <row>
+                        <cell sclass="row-title">Subject</cell>
+                        <cell>
+                            <radiogroup model="@bind(vm.priorities)"
+                                        selectedItem="@bind(vm.newTodo.priority)">
+                                <template name="model">
+                                    <radio label="@bind(each.label)"/>
+                                </template>
+                            </radiogroup>
+                        </cell>
+                    </row>
+                    <row>
+                        <cell sclass="row-title">Description :</cell>
+                        <cell>
+                            <textbox value="@bind(vm.newTodo.description)"
+                                     multiline="true" hflex="1" height="100px" />
+                        </cell>
+                    </row>
+                </rows>
+
+            </grid>
+            <hlayout>
+                <button  label="Save"  onClick="@command('save')"/>
+                <button  label="Cancel" style="background-color: red"  onClick="@command('cancel')"/>
+            </hlayout>
+        </vlayout>
+
+        <listbox   id="todoList" model="@load(vm.todos)" emptyMessage="No Todo found in the result" selectedItem="@save(vm.selectedTodo)">
+            <listhead>
+                <listheader label="Subject" />
+                <listheader label="Priority"/>
+                <listheader label="date"/>
+            </listhead>
+            <template name="model">
+                <listitem onClick="@command('select')">
+                    <listcell label="@init(each.subject)"></listcell>
+                    <listcell label="@init(each.priority)"></listcell>
+                    <listcell label="@init(each.date)"></listcell>
+                </listitem>
+            </template>
+        </listbox>
+    </window>
+</zk>

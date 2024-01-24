@@ -2,6 +2,7 @@ package com.zkproject.domain;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class UserCredential implements Serializable {
@@ -52,6 +53,9 @@ public class UserCredential implements Serializable {
         return roles.contains(role);
     }
 
+    public boolean hasRoles(List<String> roles){
+     return this.roles.containsAll(roles);
+    }
     public void addRole(String role){
         roles.add(role);
     }
@@ -62,6 +66,20 @@ public class UserCredential implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isAllowed(List<String> roles, List<String> userRole){
+        for (String r: roles) {
+            if(userRole.contains(r)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public Set<java.lang.String> getRoles() {
+        return roles;
     }
 
     @Override
